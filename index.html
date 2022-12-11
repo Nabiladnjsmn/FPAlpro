@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analyzer</title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- custom star link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+
+<!-- header section starts  -->
+
+<header class="header">
+
+    <img class="logo" src="images/logo.png">
+    <a class="name">Sentiment Analyzer</a>
+
+    <nav class="navbar">
+        <a href="#home">Home</a>
+        <a href="#result">Result</a>
+        <a href="#profile">About Us</a>
+        <a href="#contact">Contact Us</a>
+    </nav>
+
+</header>
+
+<!-- header section ends -->
+
+<!-- home section starts  -->
+
+<section class="home" id="home">
+    <div class="title">
+        <h1>Customer Review<br>Sentiment Analyzer</h1><br>
+    </div>
+
+     <form method="post" id = "form" class = "form" action = "http://127.0.0.1:5000/text">
+        <textarea placeholder="Add your review" name = "sentences" class = "sentences" id = "sentences" cols="30" rows="10"></textarea><br><br>
+        <button type="submit" id = "submit" name="submit" onclick="scrolltoId()">Analyze</button><br><br>
+        <button value="Analyze by CSV" class="btncsv" id = "btncsv"  onclick= "tocsv()">Analyze by CSV</button>   
+    </form>  
+    <section class = "csvfield" id ="csvfield" style="display:none">
+        <button class = "cancel" id = "cancel"onclick="closeForm()">X</button>
+        <p class >You can upload your CSV file by rules:<br>
+            <ol><li>Consists of only one column</li>
+                <li>The column contains the review that will be predicted</li></ol>
+        </p><br>
+            <form method="post" id = "formcsv" action="http://127.0.0.1:5000/csv" enctype="multipart/form-data">
+                <input type="file" name="rawfile" class = "rawfile" id =  "rawfile" accept=".csv"><br><br>
+                <button class = "submitcsv" id = "submitcsv" type="submit" value="Submit">Submit</button>
+            </form>
+    </section>                      
+                                     
+</section>
+
+<!-- home section ends -->
+
+<!-- result section starts  -->
+
+<section class="result" id="result">
+    <table class="tab">
+        <tr>
+            <th>
+                <div class="img">
+                    <img class="image" class="image" src="images/fish.png">
+                </div>
+            </th>
+            <th>
+                <div id="resulttext">                    
+                    <h2 id = "text-rate" style="display: none">Text Rating</h2>
+
+                    <div id = "ratefield">
+                        <div class = "star"  id = "5star" style="display: none">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                        </div>
+                        <div class = "star" id = "4star" style="display: none">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                        <div class = "star" id = "3star" style="display: none">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                        <div class = "star" id = "2star" style="display: none">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                        <div class = "star" id = "1star" style="display: none">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                    </div>
+                        <div id = "results">  
+                            <h2>Nothing here...<br>Input something first</h2>
+                        </div>
+
+                    <br><br><p id = "sen-input"></p>
+                </div>
+            </th>
+        </tr>
+    </table>
+</section>
+
+<!-- result section ends -->
+
+<!-- about section starts  -->
+
+<section class="profile" id="profile">
+    <section class="profile">
+        <div class="about">
+            <h3>About Us</h3>
+        </div>
+        <div class="container">
+            <img class="profileimage" alt="Avatar" class="profileimage" src="images/NabilaDienJasmine.png">
+            <div class="middle">
+                <div class="text">Nabile Dien Jasmine<br>162112133056</div>
+            </div> 
+        </div>
+        <div class="container">
+            <img class="profileimage" alt="Avatar" class="profileimage" src="images/JenniferChristine.png">
+            <div class="middle">
+                <div class="text">Jennifer Christine<br>162112133023</div>
+            </div> 
+        </div>
+    </section>
+</section>
+
+<!-- about section ends -->
+
+<!-- contact section starts  -->
+
+<section class="contact" id="contact">
+
+    <form method="post" id = "formcont" class = "formcont" action="http://127.0.0.1:5000/message">
+        <h3>Contact Us</h3>
+        <div class="inputBox">
+            <input type="text" placeholder="Name" id = "name" name = "name">
+        </div>
+        <div class="inputBox">
+            <input type="text" placeholder="Email" id = "email" name  = "email">
+        </div>
+        <textarea placeholder="Message" id="" cols="30" rows="10" id = "message" name = "message"></textarea>
+        <input type="submit" value="Send message" class="btn" id = "send"  onclick= "popup();">
+    </form>
+</section>
+
+<!-- contact section ends -->
+
+<!-- footer section starts  -->
+
+<section class="footer">
+
+    <div class="follow">
+        <a href="https://m.facebook.com/" class="fab fa-facebook-f"></a>
+        <a href="https://twitter.com/" class="fab fa-twitter"></a>
+        <a href="https://www.instagram.com/" class="fab fa-instagram"></a>
+        <a href="https://id.linkedin.com/" class="fab fa-linkedin"></a>
+    </div>
+
+    <div class="address">Universitas Airlangga - Kampus C<br>
+        Jl. Dr. Ir. H. Soekarno, Mulyorejo, Kec. Mulyorejo, Kota SBY, Jawa Timur 60115</div>
+
+</section>
+
+<!-- footer section ends -->
+
+<script>
+    var coll = document.getElementsByClassName("container");
+    var i;
+    
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+</script> 
+
+<script>
+    function closeForm(){
+        document.getElementById("csvfield").style.display="none"
+    }
+    function popup(){
+        var access = document.getElementById("home");
+        access.scrollIntoView({behavior: 'smooth'}, true);
+        alert("Thank you for your feedback!")
+    }
+    function tocsv(){
+        document.getElementById("csvfield").style.display = "block"
+    }
+
+    function scrolltoId(){
+        var access = document.getElementById("result");
+        access.scrollIntoView({behavior: 'smooth'}, true);
+        }
+
+    document.getElementById("form").addEventListener("submit", displayInfo)
+
+function displayInfo (e) {
+    e.preventDefault()
+    let sentences = document.getElementById("sentences").value
+    fetch("http://127.0.0.1:5000/text", {
+        method : "POST",
+        headers : {"Content-Type":"application/json"},
+        body : JSON.stringify({"sentences" : sentences,})
+    })
+        .then(function (response) {
+            return response.json()
+        })
+        .then(function (data) {
+            var result = data.result
+            var num = data.num
+            document.getElementById("text-rate").style.display = "block"
+            for (let i = 1; i < 6; i++) {
+                if (i == num) {
+                    document.getElementById(String(i)+"star").style.display = "block"
+                } else {
+                    document.getElementById(String(i)+"star").style.display = "none"
+                }
+            }
+            document.getElementById("results").innerHTML = `${result}`
+            document.getElementById("sen-input").innerHTML = "Your review: " + sentences
+        })
+}
+
+</script>
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+    
+</body>
+</html>
