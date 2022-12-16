@@ -74,10 +74,10 @@ class text(Resource):
         
         clean = first_cleaning(sentences)
         clean = second_cleaning(clean)
-        with open('modelvec.pkl','rb') as vec:
+        with open('model/modelvec.pkl','rb') as vec:
             vec = pickle.load(vec)
 
-        with open('modelsvm.pkl','rb') as svm:
+        with open('model/modelsvm.pkl','rb') as svm:
             svm = pickle.load(svm)
         input_vectorized = vec.transform([clean]) 
         predictions = svm.predict(input_vectorized)
@@ -103,10 +103,10 @@ class csv(Resource):
 
                 data["reviewContent"] = data["reviewContent"].apply(first_cleaning)
                 data["reviewContent"] = data["reviewContent"].apply(second_cleaning)
-                with open('modelvec.pkl','rb') as vec:
+                with open('model/modelvec.pkl','rb') as vec:
                     vec = pickle.load(vec)
 
-                with open('modelsvm.pkl','rb') as svm:
+                with open('model/modelsvm.pkl','rb') as svm:
                     svm = pickle.load(svm)
 
                 input_vectorized = vec.transform(data["reviewContent"]) 
@@ -141,5 +141,5 @@ api.add_resource(text,"/text")
 api.add_resource(csv, "/csv")
 api.add_resource(message, "/message")
 
-if __name__ == "__name__":
-    app.run()
+if __name__ == "__main__":
+    app.run(host="0.0.0.0")
