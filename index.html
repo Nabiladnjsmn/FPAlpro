@@ -43,7 +43,7 @@
         <h1>Customer Review<br>Sentiment Analyzer</h1><br>
     </div>
 
-     <form method="post" id = "form" class = "form" action = "http://127.0.0.1:5000/text">
+     <form method="post" id = "form" class = "form" action = "http://10.10.10.236:5000/text">
         <textarea placeholder="Add your review" name = "sentences" class = "sentences" id = "sentences" cols="30" rows="10"></textarea><br><br>
         <button type="submit" id = "submit" name="submit" onclick="scrolltoId()">Analyze</button><br><br>
         <button value="Analyze by CSV" class="btncsv" id = "btncsv"  onclick= "tocsv()">Analyze by CSV</button>   
@@ -54,7 +54,7 @@
             <ol><li>Consists of only one column</li>
                 <li>The column contains the review that will be predicted</li></ol>
         </p><br>
-            <form method="post" id = "formcsv" action="http://127.0.0.1:5000/csv" enctype="multipart/form-data">
+            <form method="post" id = "formcsv" action="http://10.10.10.236:5000/csv" enctype="multipart/form-data">
                 <input type="file" name="rawfile" class = "rawfile" id =  "rawfile" accept=".csv"><br><br>
                 <button class = "submitcsv" id = "submitcsv" type="submit" value="Submit">Submit</button>
             </form>
@@ -156,7 +156,7 @@
 
 <section class="contact" id="contact">
 
-    <form method="post" id = "formcont" class = "formcont" action="http://127.0.0.1:5000/message">
+    <form method="post" id = "formcont" class = "formcont" action="http://10.10.10.236:5000/message">
         <h3>Contact Us</h3>
         <div class="inputBox">
             <input type="text" placeholder="Name" id = "name" name = "name">
@@ -229,7 +229,7 @@
 function displayInfo (e) {
     e.preventDefault()
     let sentences = document.getElementById("sentences").value
-    fetch("http://127.0.0.1:5000/text", {
+    fetch("http://10.10.10.236:5000/text", {
         method : "POST",
         headers : {"Content-Type":"application/json"},
         body : JSON.stringify({"sentences" : sentences,})
